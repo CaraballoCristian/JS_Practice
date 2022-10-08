@@ -450,22 +450,17 @@ const ejerciciosMirCha = () => {
     //Programa una función que dada una cadena de texto cuente el número de vocales y consonantes, 
     //pe. miFuncion("Hola Mundo") devuelva Vocales: 4, Consonantes: 5.
     const ex18 = () => {
-        
-        const esVocal = char => {
-            const arrVowels = [a, e, i, o, u];
-        }
 
-        const yearsSince = (str) =>{
+        const yearsSince = (str) =>{   
             let vocales = 0;
             let consonantes = 0;
-            indice = 0;
-            while(indice < str.length){
-                if(new RegExp([a-zA-Z]).test(str[indice])){
-                    consonantes++;
-                }else{
-                    vocales++;
+
+            for (const letra of str) {
+                if(/[A-Za-z]/.test(letra)){
+                    if (/[aeiouAEIOUáéíóúÁÉÍÓÚ]/.test(letra)){
+                        vocales++;
+                    }else consonantes++;
                 }
-                indice++;
             }
             return `${vocales} Vocales y ${consonantes} Consonantes`
         }
@@ -474,15 +469,313 @@ const ejerciciosMirCha = () => {
         h2.textContent = `La Cadena ${str}, Posee:`
         p.textContent = `${yearsSince(str)}`;
     }
-    ex18();
+    //ex18();
 
     //------------------------------------------------------------------------------------
+    //Programa una función que valide que un texto sea un nombre válido, 
+    //pe. miFuncion("Jonathan MirCha") devolverá verdadero.
+    const ex19 = () => {
+
+        const validarNombre = (str) =>{   
+            if(typeof str !== "string") return "Tipo de dato erroneo, debe ingresar un String";
+            
+            for (const letra of str) {
+                if(!/^[A-Za-záéíóúÁÉÍÓÚÜü\s]$/.test(letra)){
+                    return "Invalido"                    
+                }
+            }
+            return "Valido" 
+        }
+
+        const str = "Cristian Caraballo";
+        h2.textContent = `El Nombre ${str} es:`
+        p.textContent = `${validarNombre(str)}`;
+    }
+    //ex19();
 
     //------------------------------------------------------------------------------------
+    //Programa una función que valide que un texto sea un email válido, 
+    //pe. miFuncion("jonmircha@gmail.com") devolverá verdadero.
+
+    const ex20 = () => {
+
+        const validarEmail = (str) =>{   
+            if(typeof str !== "string") return "Tipo de dato erroneo, debe ingresar un String";
+            
+            let expEmail = /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/
+
+            if(expEmail.test(str)){
+                return "Valido"                    
+            }
+            
+            return "Invalido" 
+        }
+
+        const str = "nombre@gmail.com";
+        h2.textContent = `El email ${str} es:`
+        p.textContent = `${validarEmail(str)}`;
+    }
+    //ex20();
 
     //------------------------------------------------------------------------------------
+    //Programa una función que dado un array numérico devuelve otro array con los números elevados al cuadrado, 
+    //pe. mi_funcion([1, 4, 5]) devolverá [1, 16, 25].
+    const ex21 = () => {
+
+        const elevarArray = (arr, potencia) => {
+            const arrElevado = [];
+            for(let i = 0; i < arr.length; i++){
+                if(typeof arr[i] !== "number") return "El Arreglo tiene valores no numéricos";
+                arrElevado[i] = arr[i]**potencia;
+            }
+            return arrElevado;
+        }
+
+        const arr = [1, 2, 3, 4, 5, 6];
+        const potencia = 2;
+        h2.textContent = `el arr [${arr}] elevado al ${potencia} es:`
+        p.textContent = `[${elevarArray(arr, potencia)}]`;
+
+    }
+    //ex21();
 
     //------------------------------------------------------------------------------------
+    //Programa una función que dado un array devuelva el número mas alto y el más bajo de dicho array, 
+    //pe. miFuncion([1, 4, 5, 99, -60]) devolverá [99, -60].
+    const ex22 = () => {
 
+        const obtenerMinMax = (arr) => {
+            return `${Math.max(...arr)} y ${Math.min(...arr)}`;
+        }
+
+        const arr = [1, 2, 3, 4, 5, 6];
+        h2.textContent = `Los valores Max y Min del arr [${arr}] son:`
+        p.textContent = obtenerMinMax(arr);
+
+    }
+    //ex22();
+
+    //------------------------------------------------------------------------------------
+    //Programa una función que dado un array de números devuelva un objeto con 2 arreglos en el primero almacena los números pares y en el segundo los impares, 
+    //pe. miFuncion([1,2,3,4,5,6,7,8,9,0]) devolverá {pares: [2,4,6,8,0], impares: [1,3,5,7,9]}.
+    const ex23 = () => {
+
+        const devolverObjetos = (arr) => {
+            const arrPares = [];
+            const arrImpares = [];
+
+            arr.forEach(num => {
+                if (num % 2 === 0){
+                    arrPares.push(num);
+                } else {
+                    arrImpares.push(num);  
+                } 
+            });
+
+            const obj = {
+                arrPares,
+                arrImpares,
+                print() {
+                    return `Pares: ${this.arrPares} </br>Impares: ${this.arrImpares}`;
+                }
+            }
+            return obj.print();
+        }
+
+        const arr = [1, 2, 3, 4, 5, 6,8,7,9,3,5,66,7,78];
+        h2.textContent = `Los valores Pares e Impares del arr [${arr}] son:`
+        p.innerHTML = devolverObjetos(arr);
+
+    }
+    //ex23();
+
+    //------------------------------------------------------------------------------------
+    //Programa una función que dado un arreglo de números devuelva un objeto con dos arreglos, 
+    //el 1° tendrá los numeros ordenados en forma ascendente y el 2° de forma descendiente, 
+    //pe. miFuncion([7, 5,7,8,6]) devolverá { asc: [5,6,7,7,8], desc: [8,7,7,6,5] }.
+    const ex24 = () => {
+
+        const devolverObjetos = (arr) => {
+            const arrAscendente = arr.map(num => num).sort(function(a, b){return a - b});
+            const arrDescendente = arr.sort(function(a, b){return a - b}).reverse();
+
+            const obj = {
+                arrAscendente,
+                arrDescendente,
+                print() {
+                    return `Asc:  ${this.arrAscendente} </br>Desc: ${this.arrDescendente}`;
+                }
+            }
+            return obj.print();
+        }
+
+        const arr = [231, 2, 12, 4, 22, 6, 7, 9];
+        h2.textContent = `Los valores Ascendentes y Descendentes del arr [${arr}] son:`
+        p.innerHTML = devolverObjetos(arr);
+
+    }
+    //ex24();
+
+    //------------------------------------------------------------------------------------
+    //Programa una función que dado un arreglo de elementos, elimine los duplicados, 
+    //pe. miFuncion(["x", 10, "x", 2, "10", 10, true, true]) devolverá ["x", 10, 2, "10", true]
+
+    const ex25 = () => {
+
+        const filtrarRepetidos = (arr) => {
+            const arrSet = new Set(arr);
+            return Array.from(arrSet);
+        }
+
+        const arr = [1,2,3,3,4,5,6,6,7,7,7,8,9,9];
+        h2.textContent = `El Array [${arr}] sin valores repetidos es:`
+        p.innerHTML = filtrarRepetidos(arr);
+
+    }
+    //ex25();
+
+    //------------------------------------------------------------------------------------
+    //Programa una función que dado un arreglo de números obtenga el promedio, 
+    //pe. promedio([9,8,7,6,5,4,3,2,1,0]) devolverá 4.5
+    const ex26 = () => {
+
+        const obtenerPromedio = (arr) => {
+            return arr.reduce((accumulator, curr) => accumulator + curr) / arr.length;
+        }
+
+        const arr = [1,2,3,3,1];
+        h2.textContent = `El Promedio de la suma de el array [${arr}] es:`
+        p.innerHTML = obtenerPromedio(arr);
+
+    }
+    //ex26();
+
+    //------------------------------------------------------------------------------------
+    /* 27. Programa una clase llamada Pelicula.*/
+    
+    const ex27 = () => {
+        /*La clase recibirá un objeto al momento de instanciarse con los siguentes datos: 
+        id de la película en IMDB, 
+        titulo, 
+        director, 
+        año de estreno, 
+        país o países de origen, 
+        géneros 
+        calificación en IMBD.
+        
+        - Todos los datos del objeto son obligatorios.*/
+        
+        class Pelicula {
+            constructor(peli){
+                    
+                //Valida que el id IMDB tenga 9 caracteres, los primeros 2 sean letras y los 7 restantes números.
+                if(/^([a-z]{2})([0-9]{7})$/.test(peli.id)) this.id = peli.id;
+                else console.error(`El id ${peli.id} no es un id valido, verifique que este compuesto de 2 letras seguidas de 7 numeros`);
+                
+                //Valida que el título no rebase los 100 caracteres.
+                if(peli.titulo.length < 100 && peli.titulo != "") this.titulo = peli.titulo;
+                else console.error(`El nombre del titulo debe ser mayor a 0 caracteres y  no puede rebasar los 100 caracteres`);
+                
+                //Valida que el director no rebase los 50 caracteres.
+                if(peli.director.length < 50 && peli.titulo != "") this.director = peli.director;
+                else console.error(`El nombre del Director debe ser mayor a 0 caracteres y no puede rebasar los 50 caracteres`);
+                
+                //Valida que el año de estreno sea un número entero de 4 dígitos.
+                if(/^[0-9]{4}$/.test(peli.anioEstreno)) this.anioEstreno = peli.anioEstreno;
+                else console1.error(`El año ${peli.anioEstreno}, no es un año valido. Verifique que sea un numero entero de 4 digitos`);
+                
+                //Valida que el país o paises sea introducidos en forma de arreglo.
+                if(Array.isArray(peli.origen)){
+                    let cumple = true;
+                    for (const item of peli.origen) {
+                        if(typeof item !== "string") cumple = false;
+                    } 
+                    if(cumple) this.origen = peli.origen;
+                    else console.error(`Los paises de origen deben ser ingresados en forma de Array`);   
+                } 
+                
+                //Valida que los géneros sean introducidos en forma de arreglo.
+                //Valida que los géneros introducidos esten dentro de los géneros aceptados*.
+                if(Array.isArray(peli.generos)) {
+                    let cumple = true;
+                    for (const item of peli.origen) {
+                        if(typeof item !== "string") cumple = false;
+                    } 
+                    if(cumple){
+                        peli.generos.forEach(genero => {
+                            if(Pelicula.generosAceptados.includes(genero)) this.generos = peli.generos;
+                            else console.error(`El genero ${genero}, no es un genero aceptado.`)
+                        });
+                    }
+                }              
+                    
+                //Valida que la calificación sea un número entre 0 y 10 pudiendo ser decimal de una posición.
+                if(typeof peli.calificacion === "number" && peli.calificacion >= 0 && peli.calificacion <= 10) this.calificacion = peli.calificacion;
+                else console.error(`La calificacion ingresada debe ser un numero entre el 0 y el 10`)
+            } 
+                
+            //Crea un método estático que devuelva los géneros aceptados*.
+            static get generosAceptados() {
+                return ["Action", "Adult", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Documentary", 
+                "Drama", "Family", "Fantasy", "Film Noir", "Game-Show", "History", "Horror", "Musical", "Music", "Mystery", "News", "Reality-TV", 
+                "Romance", "Sci-Fi", "Short", "Sport", "Talk-Show", "Thriller", "War", "Western"]
+            }    
+
+            static getGeneros(){
+                console.log(`Los generos aceptados son ${Pelicula.generosAceptados.join(", ")}`);
+            }
+
+            //Crea un método que devuelva toda la ficha técnica de la película.
+            getFicha() {
+                console.log(`
+                Ficha Tecnica de la Pelicula:
+
+                id: ${this.id}, 
+                titulo: ${this.titulo}, 
+                director: ${this.director},   
+                año de estreno: ${this.anioEstreno}, 
+                origen: [${this.origen}], 
+                generos: [${this.generos}], 
+                clasificacion: ${this.clasificacion}`);
+            }
+        }
+                
+        //Pelicula.getGeneros();
+
+        
+        //Apartir de un arreglo con la información de 3 películas genera 3 instancias de la clase de forma automatizada e imprime la ficha técnica de cada película.
+        const arrObj = [            
+        obj1 = {
+            id: "tt2323497", 
+            titulo: 'un titulo piola', 
+            director: 'Jon Mircha', 
+            anioEstreno: 1342, 
+            origen: ['China', 'Japan'], 
+            generos: ['Action', 'Mystery'],
+            calificacion: 4.2
+        },
+        obj2 = {
+            id: "tt5435397", 
+            titulo: 'el segundo titulo piola', 
+            director: 'otro director', 
+            anioEstreno: 2021, 
+            origen: ['Peru', 'Rusia'], 
+            generos: ['Short', 'War'],
+            calificacion: 8
+        },
+        obj3 = {
+            id: "tt8769232", 
+            titulo: 'the last titulo piola', 
+            director: 'last director', 
+            anioEstreno: 1342, 
+            origen: ['Dorne', 'Westeros'], 
+            generos: ['Fantasy', 'History'],
+            calificacion: 2
+        }
+        ];
+
+        arrObj.forEach(obj => new Pelicula(obj).getFicha());
+    }
+    ex27();
 }
 ejerciciosMirCha();
