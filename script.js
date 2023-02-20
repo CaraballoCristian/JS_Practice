@@ -9,7 +9,6 @@ const ejercicio1 = () =>{
     //n = 13
     //i = 7
 
-    //Solucion Iterativa
     const fib = (n) => {
         if (n < 2) return n;                                        //en caso de que el numero ingresado sea 0 o 1
         const arrFib = [0, 1];
@@ -21,35 +20,17 @@ const ejercicio1 = () =>{
         if(arrFib[i] === n) return i;
         return -1;
     }
-
-    //Solucion Recursiva                     PENDIENTE
-    //n = 4 → return 3
-    ///entonces, recibe el indice y devuelve el valor en dicho indice
-    /* const fibRec = n =>{
-
-        const recur = i => {
-            if (i < 2) return i;                             
-            return recur[i - 2] + recur[i - 1];            
-        }
-        
-        let i = 0;
-        if (recur(i) === n){
-            return i;
-        };
-        else i++
-    } */
-
-    
+ 
     let n = 5;
     let a = fib(n);
-    h2.textContent = `El indice para Fibonacci ${n} es:`;
+    h2.textContent = `El indice para Fibonacci ${n} es: `;
     p.textContent = a;
 }
 //ejercicio1();
 
 //---------------------------------------------------------------------------------------
 const ejercicio2 = (str) => {
-    //Dada una cadena de texto, comprobar si esta se lee igual al derecho y al revez: Ejemplo: ana, bob, otto, etc
+    //Dada una cadena de texto, comprobar si esta se lee igual al derecho y al reves: Ejemplo: ana, bob, otto, etc
    
     const esPalindromo = palabra => {
         const palabraInv = palabra.split("").reverse().join("");
@@ -65,7 +46,8 @@ const ejercicio2 = (str) => {
         p.textContent = "No es un Palindromo";
     }
 }
-//ejercicio2("asasa");
+//ejercicio2("hello");
+
 //---------------------------------------------------------------------------------------
 
 const ejercicio3 = () => {
@@ -92,16 +74,15 @@ const ejercicio3 = () => {
 //ejercicio3();
 
 //---------------------------------------------------------------------------------------
-const ejercicio4 = () => {
+const ejercicio4 = (str) => {
     //dada una cadena de texto, darla vuelta (hola → aloh) sin usar metodos propios del lenguaje, solo con estructuras de control.
 
-    str = "Hola";
     const strInv = str.split("").reverse().join("");
     h2.textContent = str;
     p.textContent = strInv;
 
 }
-//ejercicio4();
+//ejercicio4("Hola");
 
 //---------------------------------------------------------------------------------------
 const ejercicio5 = (n) => {
@@ -126,28 +107,26 @@ const ejercicio5 = (n) => {
             par += "#";
         };
     }
-    
 
     p.innerHTML = par;
 }
 //ejercicio5(4);
 
 //---------------------------------------------------------------------------------------
-const ejerciciosMirCha = () => {
+const ejerciciosCurso = () => {
     //------------------------------------------------------------------------------------
     //Programa una función que cuente el número de caracteres de una cadena de texto, 
     //pe. miFuncion("Hola Mundo") devolverá 10.
-    const ex1 = () => {
+    const ex1 = (str) => {
 
         const contarChar = str => {
             h2.textContent = `"${str}" Tiene`
             p.textContent = `${str.length} caracteres`;
         }
-
-        const str = "Hola Mundo";        
+               
         contarChar(str);
     }
-    //ex1();
+    //ex1("Hola Mundo");
 
     //------------------------------------------------------------------------------------
     //Programa una función que te devuelva el texto recortado según el número de caracteres indicados, 
@@ -265,12 +244,10 @@ const ejerciciosMirCha = () => {
 
         const limpiarStr = (str, pattern) => {
             h2.textContent = `El String: "${str}" sin "${pattern}" es:`;
-            
 
-            p.textContent = str.replace(new RegExp(pattern, "ig"), "");
+            p.textContent = str.replace(new RegExp(pattern, "ig"), "");  //regexp con flags i (case insensitive) y g (all matches)
         }
-
-        const str = "Salas";  
+  
         limpiarStr("xyz1, xyz2, xyz3, xyz4 y xyz5", "xyz");
     }
     //ex8();
@@ -282,7 +259,6 @@ const ejerciciosMirCha = () => {
         const randomNumber = (limit) => {
             h2.textContent = `Numero random entre el 0 y el ${limit}:`;
             
-
             p.textContent = Math.floor(Math.random() * 500);
         }
 
@@ -380,6 +356,7 @@ const ejerciciosMirCha = () => {
     //------------------------------------------------------------------------------------
     //Programa una función para convertir números de base binaria a decimal y viceversa, 
     //pe. miFuncion(100,2) devolverá 4 base 10.
+    // La respuesta va mas alla de la funcion integrada Number.parseInt(n, base) o parseInt(toString(base))
 
     const ex15 = () => {
         const convertirBase = (n, base) => {
@@ -412,8 +389,9 @@ const ejerciciosMirCha = () => {
         h2.textContent = `el numero ${n}${base} equivale a:`;
         p.textContent = convertirBase(n, base);
     }
-
+    
     //ex15();
+
     //------------------------------------------------------------------------------------
     //Programa una función que devuelva el monto final después de aplicar un descuento a una cantidad dada, 
     //pe. miFuncion(1000, 20) devolverá 800.
@@ -473,7 +451,7 @@ const ejerciciosMirCha = () => {
 
     //------------------------------------------------------------------------------------
     //Programa una función que valide que un texto sea un nombre válido, 
-    //pe. miFuncion("Jonathan MirCha") devolverá verdadero.
+    //pe. miFuncion("Nombre Apellido") devolverá verdadero.
     const ex19 = () => {
 
         const validarNombre = (str) =>{   
@@ -520,6 +498,11 @@ const ejerciciosMirCha = () => {
     //------------------------------------------------------------------------------------
     //Programa una función que dado un array numérico devuelve otro array con los números elevados al cuadrado, 
     //pe. mi_funcion([1, 4, 5]) devolverá [1, 16, 25].
+
+    //se puede hacer con map tranquilamente en dos lineas
+            //const arr = [1, 2, 3, 4, 5, 6];
+            //p.textContent = arr.map(n => n ** 2);
+
     const ex21 = () => {
 
         const elevarArray = (arr, potencia) => {
@@ -535,18 +518,20 @@ const ejerciciosMirCha = () => {
         const potencia = 2;
         h2.textContent = `el arr [${arr}] elevado al ${potencia} es:`
         p.textContent = `[${elevarArray(arr, potencia)}]`;
-
+        
     }
+    
     //ex21();
 
     //------------------------------------------------------------------------------------
     //Programa una función que dado un array devuelva el número mas alto y el más bajo de dicho array, 
     //pe. miFuncion([1, 4, 5, 99, -60]) devolverá [99, -60].
+
     const ex22 = () => {
 
         const obtenerMinMax = (arr) => {
-            return `${Math.max(...arr)} y ${Math.min(...arr)}`;
-        }
+            return `${Math.max(...arr)} y ${Math.min(...arr)}`;    //parametros rest necesarios para su funcionamiento
+        } 
 
         const arr = [1, 2, 3, 4, 5, 6];
         h2.textContent = `Los valores Max y Min del arr [${arr}] son:`
@@ -582,7 +567,7 @@ const ejerciciosMirCha = () => {
             return obj.print();
         }
 
-        const arr = [1, 2, 3, 4, 5, 6,8,7,9,3,5,66,7,78];
+        const arr = [1, 2, 3, 4, 5, 6, 8, 7, 9, 3, 5, 66, 7, 78];
         h2.textContent = `Los valores Pares e Impares del arr [${arr}] son:`
         p.innerHTML = devolverObjetos(arr);
 
@@ -593,11 +578,12 @@ const ejerciciosMirCha = () => {
     //Programa una función que dado un arreglo de números devuelva un objeto con dos arreglos, 
     //el 1° tendrá los numeros ordenados en forma ascendente y el 2° de forma descendiente, 
     //pe. miFuncion([7, 5,7,8,6]) devolverá { asc: [5,6,7,7,8], desc: [8,7,7,6,5] }.
+
     const ex24 = () => {
 
         const devolverObjetos = (arr) => {
-            const arrAscendente = arr.map(num => num).sort(function(a, b){return a - b});
-            const arrDescendente = arr.sort(function(a, b){return a - b}).reverse();
+            const arrAscendente = arr.map(num => num).sort(function(a, b){return a - b}); //uno tiene que ser mapeado si o si, para que no se reordene again el mismo array en la prox linea
+            const arrDescendente = arr.sort(function(a, b){return b - a});
 
             const obj = {
                 arrAscendente,
@@ -691,7 +677,7 @@ const ejerciciosMirCha = () => {
                         if(typeof item !== "string") cumple = false;
                     } 
                     if(cumple) this.origen = peli.origen;
-                    else console.error(`Los paises de origen deben ser ingresados en forma de Array`);   
+                    else console.error(`Los paises de origen deben ser strings ingresados en forma de Array`);   
                 } 
                 
                 //Valida que los géneros sean introducidos en forma de arreglo.
@@ -736,7 +722,9 @@ const ejerciciosMirCha = () => {
                 año de estreno: ${this.anioEstreno}, 
                 origen: [${this.origen}], 
                 generos: [${this.generos}], 
-                clasificacion: ${this.clasificacion}`);
+                clasificacion: ${this.clasificacion}
+                
+                `);
             }
         }
                 
@@ -775,7 +763,9 @@ const ejerciciosMirCha = () => {
         ];
 
         arrObj.forEach(obj => new Pelicula(obj).getFicha());
+        
     }
+
     ex27();
 }
-ejerciciosMirCha();
+ejerciciosCurso();
